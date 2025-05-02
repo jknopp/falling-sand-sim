@@ -18,7 +18,7 @@ namespace FallingSandSim.Systems
         {
             var px = (int)Math.Round(pos.X);
             var py = (int)Math.Round(pos.Y);
-            _renderer.DrawRectangleParticleAt(px, py, particleClassification.Type);
+            _renderer.DrawRectangleParticleAt(px, py, particleClassification);
         }
     }
 }

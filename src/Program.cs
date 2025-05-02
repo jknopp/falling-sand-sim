@@ -5,9 +5,9 @@ class Program
 {
     static void Main()
     {
-        var dimensions = new RaylibWorldDimensions(1600, 1200, cellSize: 10);
+        var dimensions = new RaylibWorldDimensions(800, 600, cellSize: 10);
         var renderer = new RaylibRenderer(dimensions.PixelWidth, dimensions.PixelHeight, dimensions.CellSize);
-        using var engine = new MatrixRainEngine(1000, dimensions, renderer);
+        using var engine = new MatrixRainEngine(dimensions, renderer);
 
         renderer.Init();
         while (!renderer.ShouldClose())

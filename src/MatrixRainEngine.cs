@@ -1,6 +1,7 @@
 using Arch.Core;
 using FallingSandSim.Behaviors;
 using FallingSandSim.Components;
+using FallingSandSim.Rendering;
 using FallingSandSim.Systems;
 using Schedulers;
 
@@ -27,7 +28,7 @@ namespace FallingSandSim
         };
 
 
-        public MatrixRainEngine(int entityCount, IWorldDimensions dimensions, IRenderer renderer)
+        public MatrixRainEngine(IWorldDimensions dimensions, IRenderer renderer)
         {
             _dimensions = dimensions;
             _world = World.Create();
@@ -46,22 +47,18 @@ namespace FallingSandSim
             });
             World.SharedJobScheduler = _scheduler;
 
-            _world.EnsureCapacity<Position, Velocity>(entityCount);
-
-            for (int i = 0; i < entityCount; i++)
+            for (int x = 0; x < _dimensions.Width; x++)
             {
-                _world.Create(
-                    new Position
+                int y = _dimensions.Height - 1;
+                var ground = _world.Create(
+                    new Position { X = x, Y = y },
+                    new ParticleClassification
                     {
-                        X = Random.Shared.Next(0, _dimensions.Width),
-                        Y = Random.Shared.Next(0, _dimensions.Height)
-                    },
-                    new Velocity
-                    {
-                        Dx = 0,
-                        Dy = Random.Shared.NextSingle() * 0.5f + 0.5f
+                        Type = ParticleType.Dirt,
+                        Color = RaylibRenderer.GetVariedColor(RaylibRenderer.GetColor(ParticleType.Dirt))
                     }
                 );
+                _grid.Set(x, y, ground);
             }
 
             _particleMoveSystem = new ParticleMoveSystem(_grid, _world, _behaviors);
@@ -76,10 +73,11 @@ namespace FallingSandSim
             if (!_grid.IsEmpty(mouseX, mouseY))
                 return;
 
+            var color = RaylibRenderer.GetVariedColor(RaylibRenderer.GetColor(type));
             var entity = _world.Create(
                 new Position { X = mouseX, Y = mouseY },
                 new Velocity { Dx = 0, Dy = 1 },
-                new ParticleClassification { Type = type },
+                new ParticleClassification { Type = type, Color = color },
                 new HasMoved { Value = false });
 
             _grid.Set(mouseX, mouseY, entity);
