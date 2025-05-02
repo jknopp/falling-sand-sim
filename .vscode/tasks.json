@@ -1,0 +1,54 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/src/FallingSandSim.csproj"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": "$msCompile"
+    },
+    {
+        "label": "build-tests",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+          "build",
+          "${workspaceFolder}/tests/FallingSandSim.Tests.csproj"
+        ],
+        "group": "build",
+        "problemMatcher": "$msCompile"
+      },
+    {
+    "label": "watch",
+    "command": "dotnet",
+    "type": "process",
+    "args": [
+        "watch",
+        "run",
+        "--project",
+        "${workspaceFolder}/src/FallingSandSim.csproj"
+    ],
+    "group": "build",
+    "problemMatcher": "$msCompile"
+    },
+    {
+        "label": "clean",
+        "command": "dotnet",
+        "type": "process",
+        "args": [
+        "clean",
+        "${workspaceFolder}/src/FallingSandSim.csproj"
+        ],
+        "group": "build",
+        "problemMatcher": "$msCompile"
+    }
+  ]
+}

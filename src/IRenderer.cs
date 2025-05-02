@@ -2,6 +2,7 @@ namespace FallingSandSim
 {
     public interface IRenderer
     {
-        void DrawAt(int x, int y, char c);
+        void DrawCharAt(int x, int y, char c);
+        void DrawRectangleParticleAt(int x, int y, ParticleType type);
     }
 }

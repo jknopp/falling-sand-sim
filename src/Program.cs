@@ -5,7 +5,7 @@ class Program
 {
     static void Main()
     {
-        var dimensions = new RaylibWorldDimensions(800, 600, cellSize: 10);
+        var dimensions = new RaylibWorldDimensions(1600, 1200, cellSize: 10);
         var renderer = new RaylibRenderer(dimensions.PixelWidth, dimensions.PixelHeight, dimensions.CellSize);
         using var engine = new MatrixRainEngine(1000, dimensions, renderer);
 
@@ -14,8 +14,13 @@ class Program
         {
             renderer.BeginFrame();
 
-            engine.UpdateOneFrame();
+            if (renderer.IsLeftMouseButtonDown())
+            {
+                var (mouseX, mouseY) = renderer.GetMouseXY(dimensions.CellSize);
+                engine.SpawnParticle(mouseX, mouseY, ParticleType.Sand);
+            }
 
+            engine.UpdateOneFrame();
             renderer.EndFrame();
         }
 

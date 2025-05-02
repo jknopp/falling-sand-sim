@@ -69,7 +69,11 @@ namespace FallingSandSim.Tests
 
         private class MockRenderer : IRenderer
         {
-            public void DrawAt(int x, int y, char c) { }
+            public void DrawCharAt(int x, int y, char c) { }
+
+            public void DrawRectangleParticleAt(int x, int y, ParticleType type)
+            {
+            }
         }
     }
 }

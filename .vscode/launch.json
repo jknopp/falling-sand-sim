@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "coreclr",
+      "request": "launch",
+      "name": "Launch FallingSandSim",
+      "program": "${workspaceFolder}/src/bin/Debug/net9.0/FallingSandSim.dll",
+      "cwd": "${workspaceFolder}/src",
+      "preLaunchTask": "build",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    {
+      "type": "coreclr",
+      "request": "launch",
+      "name": "Debug Tests",
+      "program": "${workspaceFolder}/tests/bin/Debug/net9.0/FallingSandSim.Tests.dll",
+      "cwd": "${workspaceFolder}/tests",
+      "preLaunchTask": "build-tests",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  ]
+}

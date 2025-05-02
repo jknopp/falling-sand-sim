@@ -4,7 +4,7 @@ using FallingSandSim.Components;
 
 namespace FallingSandSim.Systems
 {
-    public struct DrawSystem : IForEach<Position>
+    public struct DrawSystem : IForEach<Position, ParticleClassification>
     {
         private readonly IRenderer _renderer;
 
@@ -14,12 +14,11 @@ namespace FallingSandSim.Systems
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Update(ref Position pos)
+        public void Update(ref Position pos, ref ParticleClassification particleClassification)
         {
-            int x = (int)Math.Round(pos.X);
-            int y = (int)Math.Round(pos.Y);
-
-            _renderer.DrawAt(x, y, 'X');
+            var px = (int)Math.Round(pos.X);
+            var py = (int)Math.Round(pos.Y);
+            _renderer.DrawRectangleParticleAt(px, py, particleClassification.Type);
         }
     }
 }

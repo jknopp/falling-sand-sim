@@ -37,9 +37,31 @@ namespace FallingSandSim.Rendering
             Raylib.EndDrawing();
         }
 
-        public void DrawAt(int x, int y, char c)
+        public bool IsLeftMouseButtonDown()
+        {
+            return Raylib.IsMouseButtonDown(MouseButton.Left);
+        }
+        public (int, int) GetMouseXY(int cellSize)
+        {
+            return (Raylib.GetMouseX() / cellSize, Raylib.GetMouseY() / cellSize);
+        }
+
+        public void DrawCharAt(int x, int y, char c)
         {
             Raylib.DrawText(c.ToString(), x * _cellSize, y * _cellSize, _cellSize, Color.Green);
+        }
+
+        public void DrawRectangleParticleAt(int x, int y, ParticleType type)
+        {
+            Color color = type switch
+            {
+                ParticleType.Sand => new Color(194, 178, 128, 255),
+                ParticleType.Fire => new Color(255, 69, 0, 255),
+                ParticleType.Smoke => new Color(128, 128, 128, 255),
+                _ => Color.White,
+            };
+
+            Raylib.DrawRectangle(x * _cellSize, y * _cellSize, _cellSize, _cellSize, color);
         }
 
         public void Dispose()
