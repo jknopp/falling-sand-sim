@@ -1,7 +1,8 @@
-using Arch.Core;
 using System.Collections.Concurrent;
+using Arch.Core;
+using FallingSandSim.Rendering;
 
-namespace FallingSandSim
+namespace FallingSandSim.Engine
 {
     public class Chunk
     {

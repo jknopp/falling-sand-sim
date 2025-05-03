@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace FallingSandSim.Components
+namespace FallingSandSim.Core.Components
 {
     [StructLayout(LayoutKind.Sequential)]
     public struct Position

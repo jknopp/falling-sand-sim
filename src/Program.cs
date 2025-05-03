@@ -1,5 +1,8 @@
-﻿using FallingSandSim;
-using FallingSandSim.Rendering;
+﻿using FallingSandSim.Core;
+using FallingSandSim.Engine;
+using FallingSandSim.Rendering.Raylib;
+
+namespace FallingSandSim;
 
 class Program
 {

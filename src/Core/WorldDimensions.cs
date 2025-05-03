@@ -1,4 +1,4 @@
-namespace FallingSandSim.Rendering
+namespace FallingSandSim.Core
 {
     public class WorldDimensions : IWorldDimensions
     {

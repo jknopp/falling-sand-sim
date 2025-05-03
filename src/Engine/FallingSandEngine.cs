@@ -1,12 +1,14 @@
 using System.Collections.Concurrent;
 using Arch.Core;
-using FallingSandSim.Behaviors;
-using FallingSandSim.Components;
+using FallingSandSim.Core;
+using FallingSandSim.Core.Behaviors;
+using FallingSandSim.Core.Components;
+using FallingSandSim.Core.Systems;
 using FallingSandSim.Rendering;
-using FallingSandSim.Systems;
+using FallingSandSim.Rendering.Raylib;
 using Schedulers;
 
-namespace FallingSandSim
+namespace FallingSandSim.Engine
 {
     public class FallingSandEngine : IDisposable
     {

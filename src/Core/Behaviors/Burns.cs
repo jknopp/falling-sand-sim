@@ -1,6 +1,8 @@
 using Arch.Core;
-using FallingSandSim;
-using FallingSandSim.Components;
+using FallingSandSim.Core.Components;
+using FallingSandSim.Engine;
+
+namespace FallingSandSim.Core.Behaviors;
 
 public class Burns : IBehavior
 {

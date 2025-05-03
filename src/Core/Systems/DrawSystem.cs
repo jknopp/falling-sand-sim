@@ -1,8 +1,9 @@
 using System.Runtime.CompilerServices;
 using Arch.Core;
-using FallingSandSim.Components;
+using FallingSandSim.Core.Components;
+using FallingSandSim.Rendering;
 
-namespace FallingSandSim.Systems
+namespace FallingSandSim.Core.Systems
 {
     public struct DrawSystem : IForEach<Position, ParticleClassification>
     {

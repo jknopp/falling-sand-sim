@@ -1,8 +1,8 @@
-
 using Arch.Core;
-using FallingSandSim.Components;
+using FallingSandSim.Core.Components;
+using FallingSandSim.Engine;
 
-namespace FallingSandSim.Behaviors
+namespace FallingSandSim.Core.Behaviors
 {
     public class RisesUp : IBehavior
     {

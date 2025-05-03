@@ -1,8 +1,8 @@
 using System.Runtime.CompilerServices;
 using Arch.Core;
-using FallingSandSim.Components;
+using FallingSandSim.Core.Components;
 
-namespace FallingSandSim.Systems
+namespace FallingSandSim.Core.Systems
 {
     public struct ResetMoveSystem : IForEach<HasMoved>
     {

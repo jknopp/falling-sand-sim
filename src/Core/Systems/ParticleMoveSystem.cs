@@ -1,8 +1,11 @@
 using System.Runtime.CompilerServices;
 using Arch.Core;
-using FallingSandSim.Components;
+using FallingSandSim.Core.Behaviors;
+using FallingSandSim.Core.Components;
+using FallingSandSim.Engine;
+using Chunk = FallingSandSim.Engine.Chunk;
 
-namespace FallingSandSim.Systems
+namespace FallingSandSim.Core.Systems
 {
     public struct ParticleMoveSystem : IForEach<Position, Velocity, ParticleClassification, HasMoved>
     {

@@ -1,7 +1,8 @@
-using FallingSandSim.Components;
+using FallingSandSim.Core;
+using FallingSandSim.Core.Components;
 using Raylib_cs;
 
-namespace FallingSandSim.Rendering
+namespace FallingSandSim.Rendering.Raylib
 {
     public class RaylibRenderer : IRenderer, IDisposable
     {
@@ -18,48 +19,48 @@ namespace FallingSandSim.Rendering
 
         public void Init()
         {
-            Raylib.InitWindow(_screenWidth, _screenHeight, "Falling Sand Simulation");
-            Raylib.SetTargetFPS(60);
+            Raylib_cs.Raylib.InitWindow(_screenWidth, _screenHeight, "Falling Sand Simulation");
+            Raylib_cs.Raylib.SetTargetFPS(60);
         }
 
         public bool ShouldClose()
         {
-            return Raylib.WindowShouldClose();
+            return Raylib_cs.Raylib.WindowShouldClose();
         }
 
         public void BeginFrame()
         {
-            Raylib.BeginDrawing();
-            Raylib.ClearBackground(Color.Black);
+            Raylib_cs.Raylib.BeginDrawing();
+            Raylib_cs.Raylib.ClearBackground(Color.Black);
         }
 
         public void EndFrame()
         {
-            Raylib.EndDrawing();
+            Raylib_cs.Raylib.EndDrawing();
         }
 
         public bool IsLeftMouseButtonDown()
         {
-            return Raylib.IsMouseButtonDown(MouseButton.Left);
+            return Raylib_cs.Raylib.IsMouseButtonDown(MouseButton.Left);
         }
         public (int, int) GetMouseXY(int cellSize)
         {
-            return (Raylib.GetMouseX() / cellSize, Raylib.GetMouseY() / cellSize);
+            return (Raylib_cs.Raylib.GetMouseX() / cellSize, Raylib_cs.Raylib.GetMouseY() / cellSize);
         }
 
         public void DrawCharAt(int x, int y, char c)
         {
-            Raylib.DrawText(c.ToString(), x * _cellSize, y * _cellSize, _cellSize, Color.Green);
+            Raylib_cs.Raylib.DrawText(c.ToString(), x * _cellSize, y * _cellSize, _cellSize, Color.Green);
         }
 
         public void DrawRectangleParticleAt(int x, int y, ParticleClassification particleClassification)
         {
-            Raylib.DrawRectangle(x * _cellSize, y * _cellSize, _cellSize, _cellSize, particleClassification.Color);
+            Raylib_cs.Raylib.DrawRectangle(x * _cellSize, y * _cellSize, _cellSize, _cellSize, particleClassification.Color);
         }
 
         public void Dispose()
         {
-            Raylib.CloseWindow();
+            Raylib_cs.Raylib.CloseWindow();
         }
 
         public static Color GetColor(ParticleType type)

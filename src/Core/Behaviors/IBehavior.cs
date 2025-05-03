@@ -1,7 +1,8 @@
 using Arch.Core;
-using FallingSandSim.Components;
+using FallingSandSim.Core.Components;
+using FallingSandSim.Engine;
 
-namespace FallingSandSim
+namespace FallingSandSim.Core.Behaviors
 {
     public interface IBehavior
     {

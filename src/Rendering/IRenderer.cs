@@ -1,6 +1,6 @@
-using FallingSandSim.Components;
+using FallingSandSim.Core.Components;
 
-namespace FallingSandSim
+namespace FallingSandSim.Rendering
 {
     public interface IRenderer
     {

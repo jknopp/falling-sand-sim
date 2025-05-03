@@ -1,4 +1,4 @@
-namespace FallingSandSim
+namespace FallingSandSim.Core
 {
     public enum ParticleType
     {

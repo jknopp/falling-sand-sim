@@ -1,8 +1,11 @@
 ﻿using System.Diagnostics;
-using FallingSandSim.Components;
+using FallingSandSim.Core;
+using FallingSandSim.Core.Components;
+using FallingSandSim.Engine;
+using FallingSandSim.Rendering;
 using Xunit;
 
-namespace FallingSandSim.Tests
+namespace FallingSandSim.Tests.Stress
 {
     public class FallingSandEngineStressTests
     {
