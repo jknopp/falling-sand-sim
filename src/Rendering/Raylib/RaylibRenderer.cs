@@ -55,7 +55,8 @@ namespace FallingSandSim.Rendering.Raylib
 
         public void DrawRectangleParticleAt(int x, int y, ParticleClassification particleClassification)
         {
-            Raylib_cs.Raylib.DrawRectangle(x * _cellSize, y * _cellSize, _cellSize, _cellSize, particleClassification.Color);
+            var color = ToRaylibColor(particleClassification.Color);
+            Raylib_cs.Raylib.DrawRectangle(x * _cellSize, y * _cellSize, _cellSize, _cellSize, color);
         }
 
         public void Dispose()
@@ -63,30 +64,9 @@ namespace FallingSandSim.Rendering.Raylib
             Raylib_cs.Raylib.CloseWindow();
         }
 
-        public static Color GetColor(ParticleType type)
+        private static Color ToRaylibColor(ParticleColor color)
         {
-            return type switch
-            {
-                ParticleType.Dirt => new Color(139, 69, 19, 255),
-                ParticleType.Sand => new Color(194, 178, 128, 255),
-                ParticleType.Fire => new Color(255, 69, 0, 255),
-                ParticleType.Smoke => new Color(128, 128, 128, 255),
-                _ => Color.White,
-            };
+            return new Color(color.R, color.G, color.B, color.A);
         }
-
-        public static Color GetVariedColor(Color baseColor)
-        {
-            int variation = Random.Shared.Next(-10, 10);
-
-            return new Color(
-                (byte)Clamp(baseColor.R + variation, 0, 255),
-                (byte)Clamp(baseColor.G + variation, 0, 255),
-                (byte)Clamp(baseColor.B + variation, 0, 255),
-                baseColor.A
-            );
-        }
-
-        private static int Clamp(int value, int min, int max) => Math.Max(min, Math.Min(max, value));
     }
 }

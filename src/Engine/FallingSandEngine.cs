@@ -58,7 +58,7 @@ namespace FallingSandSim.Engine
                     new ParticleClassification
                     {
                         Type = ParticleType.Dirt,
-                        Color = RaylibRenderer.GetVariedColor(RaylibRenderer.GetColor(ParticleType.Dirt)) // Would prefer not having this dependency here
+                        Color = ParticleColorGenerator.GetVariedColor(ParticleType.Dirt)
                     }
                 );
                 _grid.Set(x, y, ground);
@@ -76,7 +76,7 @@ namespace FallingSandSim.Engine
             if (!_grid.IsEmpty(mouseX, mouseY))
                 return;
 
-            var color = RaylibRenderer.GetVariedColor(RaylibRenderer.GetColor(type));
+            var color = ParticleColorGenerator.GetVariedColor(type);
             var entity = _world.Create(
                 new Position { X = mouseX, Y = mouseY },
                 new Velocity { Dx = 0, Dy = 1 },

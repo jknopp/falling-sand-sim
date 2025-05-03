@@ -1,5 +1,4 @@
 using System.Runtime.InteropServices;
-using Raylib_cs;
 
 namespace FallingSandSim.Core.Components
 {
@@ -8,6 +7,6 @@ namespace FallingSandSim.Core.Components
     {
         public ParticleType Type;
         // TODO: Don't depend on Raylib
-        public Color Color;
+        public ParticleColor Color;
     }
 }
