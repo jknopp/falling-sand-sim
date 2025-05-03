@@ -1,12 +1,12 @@
 namespace FallingSandSim.Rendering
 {
-    public class RaylibWorldDimensions : IWorldDimensions
+    public class WorldDimensions : IWorldDimensions
     {
         private readonly int _screenWidth;
         private readonly int _screenHeight;
         private readonly int _cellSize;
 
-        public RaylibWorldDimensions(int screenWidth, int screenHeight, int cellSize = 10)
+        public WorldDimensions(int screenWidth, int screenHeight, int cellSize = 10)
         {
             _screenWidth = screenWidth;
             _screenHeight = screenHeight;

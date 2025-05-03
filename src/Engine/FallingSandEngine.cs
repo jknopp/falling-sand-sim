@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using Arch.Core;
 using FallingSandSim.Behaviors;
 using FallingSandSim.Components;
@@ -7,7 +8,7 @@ using Schedulers;
 
 namespace FallingSandSim
 {
-    public class MatrixRainEngine : IDisposable
+    public class FallingSandEngine : IDisposable
     {
         private readonly IWorldDimensions _dimensions;
         private readonly World _world;
@@ -28,11 +29,11 @@ namespace FallingSandSim
         };
 
 
-        public MatrixRainEngine(IWorldDimensions dimensions, IRenderer renderer)
+        public FallingSandEngine(IWorldDimensions dimensions, IRenderer renderer)
         {
             _dimensions = dimensions;
             _world = World.Create();
-            _grid = new Grid();
+            _grid = new Grid(renderer);
 
             _movedQuery = new QueryDescription().WithAll<HasMoved>();
             _particleMoveQuery = new QueryDescription().WithAll<Position, Velocity, ParticleClassification, HasMoved>();
@@ -55,7 +56,7 @@ namespace FallingSandSim
                     new ParticleClassification
                     {
                         Type = ParticleType.Dirt,
-                        Color = RaylibRenderer.GetVariedColor(RaylibRenderer.GetColor(ParticleType.Dirt))
+                        Color = RaylibRenderer.GetVariedColor(RaylibRenderer.GetColor(ParticleType.Dirt)) // Would prefer not having this dependency here
                     }
                 );
                 _grid.Set(x, y, ground);
@@ -87,9 +88,46 @@ namespace FallingSandSim
         {
             _world.InlineParallelQuery<ResetMoveSystem, HasMoved>(in _movedQuery, ref ResetMoveSystem.Instance);
             _world.InlineParallelQuery<ParticleMoveSystem, Position, Velocity, ParticleClassification, HasMoved>(in _particleMoveQuery, ref _particleMoveSystem);
-            _world.InlineQuery<DrawSystem, Position, ParticleClassification>(in _particleDrawQuery, ref _drawSystem);
-        }
 
+            var drawQueue = new ConcurrentQueue<(Position pos, ParticleClassification tag)>();
+
+            // Parallel render preparation over dirty chunks
+            Parallel.ForEach(_grid.DirtyChunks(), chunkEntry =>
+            {
+                var ((chunkX, chunkY), chunk) = chunkEntry;
+                var toKeep = new List<(int, int)>();
+
+                foreach (var (localX, localY) in chunk.DirtyCells)
+                {
+                    int worldX = chunkX * Chunk.ChunkSize + localX;
+                    int worldY = chunkY * Chunk.ChunkSize + localY;
+
+                    var entity = _grid.Get(worldX, worldY);
+                    if (entity == default ||
+                        !_world.Has<Position>(entity) ||
+                        !_world.Has<ParticleClassification>(entity))
+                        continue;
+
+                    ref var pos = ref _world.Get<Position>(entity);
+                    ref var tag = ref _world.Get<ParticleClassification>(entity);
+                    drawQueue.Enqueue((pos, tag));
+
+                    if (!_world.Has<HasMoved>(entity))
+                        toKeep.Add((localX, localY));
+                }
+
+                // Safely replace DirtyCells after scanning
+                chunk.DirtyCells.Clear();
+                foreach (var cell in toKeep)
+                    chunk.DirtyCells.Add(cell);
+            });
+
+            // Main-thread rendering to comply with Raylib
+            while (drawQueue.TryDequeue(out var item))
+            {
+                _drawSystem.Update(ref item.pos, ref item.tag);
+            }
+        }
         public void Dispose()
         {
             _scheduler.Dispose();

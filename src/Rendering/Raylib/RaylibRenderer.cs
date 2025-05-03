@@ -9,16 +9,16 @@ namespace FallingSandSim.Rendering
         private readonly int _screenWidth;
         private readonly int _screenHeight;
 
-        public RaylibRenderer(int screenWidth, int screenHeight, int cellSize = 10)
+        public RaylibRenderer(IWorldDimensions worldDimensions)
         {
-            _screenWidth = screenWidth;
-            _screenHeight = screenHeight;
-            _cellSize = cellSize;
+            _screenWidth = worldDimensions.PixelWidth;
+            _screenHeight = worldDimensions.PixelHeight;
+            _cellSize = worldDimensions.CellSize;
         }
 
         public void Init()
         {
-            Raylib.InitWindow(_screenWidth, _screenHeight, "Matrix Rain");
+            Raylib.InitWindow(_screenWidth, _screenHeight, "Falling Sand Simulation");
             Raylib.SetTargetFPS(60);
         }
 

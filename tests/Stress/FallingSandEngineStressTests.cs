@@ -4,20 +4,20 @@ using Xunit;
 
 namespace FallingSandSim.Tests
 {
-    public class MatrixRainEngineStressTests
+    public class FallingSandEngineStressTests
     {
         [Fact]
-        public void MatrixRainEngine_StressUnderHighEntityCount_MaintainsStableFrameTime()
+        public void FallingSandEngine_StressUnderHighEntityCount_MaintainsStableFrameTime()
         {
             // Arrange
-            const int entityCount = 10000;
+            const int entityCount = 100000;
             const int frameCount = 500;
             const double acceptableSpikeThresholdMs = 4;
             const double allowedSpikeRate = 0.01;
 
-            var dimensions = new DummyWorldDimensions(800, 600, cellSize: 10);
+            var dimensions = new DummyWorldDimensions(10000, 10000, cellSize: 10);
             var renderer = new MockRenderer();
-            using var engine = new MatrixRainEngine(dimensions, renderer);
+            using var engine = new FallingSandEngine(dimensions, renderer);
 
             // Pre-spawn particles into the world
             for (int i = 0; i < entityCount; i++)
@@ -78,6 +78,9 @@ namespace FallingSandSim.Tests
         private class MockRenderer : IRenderer
         {
             public void DrawCharAt(int x, int y, char c) { }
+
+            public void DrawRectangleBackgroundAt(int x, int y) { }
+
             public void DrawRectangleParticleAt(int x, int y, ParticleClassification particleClassificationx) { }
         }
     }
