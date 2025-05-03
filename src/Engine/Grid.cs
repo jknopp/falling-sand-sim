@@ -1,6 +1,5 @@
 using System.Collections.Concurrent;
 using Arch.Core;
-using FallingSandSim.Rendering;
 
 namespace FallingSandSim.Engine
 {
@@ -13,14 +12,7 @@ namespace FallingSandSim.Engine
 
     public class Grid
     {
-        private readonly IRenderer _renderer;
         private readonly ConcurrentDictionary<(int, int), Chunk> _chunks = new();
-
-        // TODO: This isn't the right place to render
-        public Grid(IRenderer renderer)
-        {
-            _renderer = renderer;
-        }
 
         public Chunk GetOrCreateChunk(int chunkX, int chunkY)
         {

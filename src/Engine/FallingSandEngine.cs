@@ -35,7 +35,7 @@ namespace FallingSandSim.Engine
         {
             _dimensions = dimensions;
             _world = World.Create();
-            _grid = new Grid(renderer);
+            _grid = new Grid();
 
             _movedQuery = new QueryDescription().WithAll<HasMoved>();
             _particleMoveQuery = new QueryDescription().WithAll<Position, Velocity, ParticleClassification, HasMoved>();
