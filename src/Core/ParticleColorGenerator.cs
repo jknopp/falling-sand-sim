@@ -12,6 +12,7 @@ namespace FallingSandSim.Core
                 ParticleType.Sand => (194, 178, 128, 255),
                 ParticleType.Fire => (255, 69, 0, 255),
                 ParticleType.Smoke => (128, 128, 128, 255),
+                ParticleType.Water => (30, 144, 255, 255),
                 _ => (255, 255, 255, 255)
             };
 

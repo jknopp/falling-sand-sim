@@ -28,6 +28,7 @@ namespace FallingSandSim.Engine
             { ParticleType.Sand, new List<IBehavior> { new MovesDown() } },
             { ParticleType.Fire, new List<IBehavior> { new Burns(), new RisesUp() } },
             { ParticleType.Smoke, new List<IBehavior> { new RisesUp() } },
+            { ParticleType.Water, new List<IBehavior> { new FlowsLikeLiquid() } },
         };
 
 

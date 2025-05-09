@@ -23,6 +23,12 @@ class Program
                 engine.SpawnParticle(mouseX, mouseY, ParticleType.Sand);
             }
 
+            if (renderer.IsRightMouseButtonDown())
+            {
+                var (mouseX, mouseY) = renderer.GetMouseXY(dimensions.CellSize);
+                engine.SpawnParticle(mouseX, mouseY, ParticleType.Water);
+            }
+
             engine.UpdateOneFrame();
             renderer.EndFrame();
         }

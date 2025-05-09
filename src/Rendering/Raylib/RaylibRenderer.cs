@@ -43,6 +43,12 @@ namespace FallingSandSim.Rendering.Raylib
         {
             return Raylib_cs.Raylib.IsMouseButtonDown(MouseButton.Left);
         }
+
+        public bool IsRightMouseButtonDown()
+        {
+            return Raylib_cs.Raylib.IsMouseButtonDown(MouseButton.Right);
+        }
+
         public (int, int) GetMouseXY(int cellSize)
         {
             return (Raylib_cs.Raylib.GetMouseX() / cellSize, Raylib_cs.Raylib.GetMouseY() / cellSize);

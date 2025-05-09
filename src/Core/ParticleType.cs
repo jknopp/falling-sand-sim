@@ -5,6 +5,7 @@ namespace FallingSandSim.Core
         Dirt,
         Sand,
         Fire,
-        Smoke
+        Smoke,
+        Water
     }
 }
